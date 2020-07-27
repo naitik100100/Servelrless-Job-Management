@@ -12,6 +12,7 @@ import { Ordered_Jobs } from '@app/shared/jobs.model';
 })
 export class SearchJobComponent implements OnInit {
   jobs: Ordered_Jobs[] = [];
+  searchedJobs: Jobs[] = [];
   public jobName = '';
   message = '';
   columns: string[] = ['partId', 'jobName', 'userId', 'qty'];
@@ -20,9 +21,14 @@ export class SearchJobComponent implements OnInit {
   constructor(public service: JobService, private toastr: ToastrService, private dialog: MatDialog) {}
 
   ngOnInit() {
+    this.getAllorders();
+  }
+
+  getAllorders() {
     this.service.getAllorders().subscribe(
       (response: JobResponse_OrderedJob) => {
-        this.jobs = response?.items;
+        this.jobs = response?.Items;
+        this.searchedJobs = this.jobs;
         console.log(response);
       },
       (error) => console.log(error)
@@ -30,25 +36,21 @@ export class SearchJobComponent implements OnInit {
   }
 
   searchJob() {
-    this.service.searchJob(this.jobName).subscribe(
-      (response: JobResponse_OrderedJob) => {
-        console.log(response);
-        this.jobs = response?.items;
-        if (this.jobs.length == 0) {
-          this.toastr.error('Job does not exists in database', 'No job Found.');
-        } else {
-          this.toastr.success('', 'Job Found');
-        }
-      },
-      (error) => {
-        this.message = error;
-        console.log(error);
+    this.searchedJobs = [];
+    this.jobs.forEach((job) => {
+      if (this.jobName == job.jobName) {
+        this.searchedJobs.push(job);
       }
-    );
+    });
+    if (this.searchedJobs.length == 0) {
+      this.toastr.error('Job does not exists in database', 'No job Found.');
+    } else {
+      this.toastr.success('', 'Job Found');
+    }
   }
 
   clearSearch() {
     this.jobName = '';
-    this.ngOnInit();
+    this.getAllorders();
   }
 }

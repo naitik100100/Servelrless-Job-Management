@@ -28,7 +28,7 @@ export interface JobResponse_OrderedJob {
   success: boolean;
   statusCode: number;
   message?: string;
-  items?: Ordered_Jobs[];
+  Items?: Ordered_Jobs[];
   error?: any;
 }
 
@@ -36,6 +36,6 @@ export interface JobResponse {
   success: boolean;
   statusCode: number;
   message?: string;
-  items?: Jobs[];
+  Items?: Jobs[];
   error?: any;
 }

@@ -1,9 +1,11 @@
+import { PartsService } from './../../shared/parts.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '@app/shared/job.service';
 import { Jobs, JobResponse } from '@app/shared/jobs.model';
 import { NgForm } from '@angular/forms';
+import { Parts } from '@app/shared/parts.model';
 
 @Component({
   selector: 'app-getone-job',
@@ -12,13 +14,44 @@ import { NgForm } from '@angular/forms';
 })
 export class GetOnejobComponent implements OnInit {
   jobs: Jobs[] = [];
+  parts: Parts[] = [];
+  searchedJobs: Jobs[] = [];
   columns: string[] = ['jobName', 'partId', 'qty'];
   index = ['jobName', 'partId', 'qty'];
 
-  constructor(public service: JobService, private toastr: ToastrService, private router: Router) {}
+  constructor(
+    public service: JobService,
+    public part_service: PartsService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.resetFrom();
+    this.getAllJobs();
+    this.getAllParts();
+  }
+
+  getAllJobs() {
+    this.service.getJobsList().subscribe(
+      (response: JobResponse) => {
+        this.jobs = response?.Items;
+        //this.searchedJobs = this.jobs;
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  getAllParts() {
+    this.part_service.getPartsList().subscribe(
+      (response) => {
+        this.parts = response['Items'];
+        //this.searchedJobs = this.jobs;
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
   }
 
   resetFrom(form?: NgForm) {
@@ -34,21 +67,23 @@ export class GetOnejobComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    this.service.getOneJob(form.value).subscribe(
-      (response: JobResponse) => {
-        this.jobs = response?.items;
-        console.log(response);
-        this.resetFrom(form);
-        if (this.jobs.length == 0) {
-          this.toastr.error('Job does not exists in database', 'No job Found.');
-        } else {
-          this.toastr.success('', 'Job Found');
-        }
-      },
-      (error) => {
-        console.log(error.message);
-        this.toastr.error('Part id does not exist in Parts table', 'This Job can not be Added');
+    this.searchedJobs = [];
+
+    this.parts.filter((part) => {
+      if (form.value.partId == part.partId) {
+        this.jobs.forEach((job) => {
+          if (form.value.jobName == job.jobName && job.partId == part.partId) {
+            console.log(job);
+            this.searchedJobs.push(job);
+          }
+        });
       }
-    );
+    });
+
+    if (this.searchedJobs.length == 0) {
+      this.toastr.error('Job does not exists in database', 'No job Found.');
+    } else {
+      this.toastr.success('', 'Job Found');
+    }
   }
 }

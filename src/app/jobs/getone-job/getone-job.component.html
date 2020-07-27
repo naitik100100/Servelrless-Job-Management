@@ -38,12 +38,12 @@
         </div>
       </form>
       <table class="table table-hover">
-        <tr *ngIf="jobs.length >= 1">
+        <tr *ngIf="searchedJobs.length >= 1">
           <th *ngFor="let col of columns">
             {{ col }}
           </th>
         </tr>
-        <tr *ngFor="let job of jobs; let i = index">
+        <tr *ngFor="let job of searchedJobs; let i = index">
           <td>{{ job.jobName }}</td>
           <td>{{ job.partId }}</td>
           <td>{{ job.qty }}</td>

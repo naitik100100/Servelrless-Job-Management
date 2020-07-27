@@ -28,7 +28,7 @@ export class DisplayJobsComponent implements OnInit {
   getData() {
     this.service.getJobsList().subscribe(
       (response: JobResponse) => {
-        this.jobs = response?.items;
+        this.jobs = response?.Items;
         console.log(response);
       },
       (error) => console.log(error)
