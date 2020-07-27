@@ -36,16 +36,25 @@ export class SearchJobComponent implements OnInit {
   }
 
   searchJob() {
-    this.searchedJobs = [];
-    this.jobs.forEach((job) => {
-      if (this.jobName == job.jobName) {
-        this.searchedJobs.push(job);
+    let valid = true;
+    //console.log(this.jobName);
+    if (this.jobName == '') {
+      this.toastr.error('JobName cannot be empty');
+      valid = false;
+    }
+
+    if (valid) {
+      this.searchedJobs = [];
+      this.jobs.forEach((job) => {
+        if (this.jobName == job.jobName) {
+          this.searchedJobs.push(job);
+        }
+      });
+      if (this.searchedJobs.length == 0) {
+        this.toastr.error('Job does not exists in database', 'No job Found.');
+      } else {
+        this.toastr.success('', 'Job Found');
       }
-    });
-    if (this.searchedJobs.length == 0) {
-      this.toastr.error('Job does not exists in database', 'No job Found.');
-    } else {
-      this.toastr.success('', 'Job Found');
     }
   }
 

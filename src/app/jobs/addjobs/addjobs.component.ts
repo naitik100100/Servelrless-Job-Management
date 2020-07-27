@@ -47,21 +47,33 @@ export class AddJobsComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     console.log(form.value);
+    let valid = true;
+    if (form.value.partId < 0) {
+      this.toastr.error('PartId cannot be negative');
+      valid = false;
+    }
+    if (form.value.qty < 0) {
+      this.toastr.error('Quantity cannot be negative');
+      valid = false;
+    }
+
     let flag = false;
-    this.parts.filter((part) => {
-      if (form.value.partId == part.partId) {
-        flag = true;
-        this.service.postJobs(form.value).subscribe(
-          (res) => {
-            this.resetFrom(form);
-            this.router.navigateByUrl('/jobs/displayjobs');
-          },
-          (error) => {
-            console.log(error.message);
-          }
-        );
-      }
-    });
+    if (valid) {
+      this.parts.filter((part) => {
+        if (form.value.partId == part.partId) {
+          flag = true;
+          this.service.postJobs(form.value).subscribe(
+            (res) => {
+              this.resetFrom(form);
+              this.router.navigateByUrl('/jobs/displayjobs');
+            },
+            (error) => {
+              console.log(error.message);
+            }
+          );
+        }
+      });
+    }
     if (flag) {
       this.toastr.success('New Record Added Successfully', 'Job Info Added');
     } else {

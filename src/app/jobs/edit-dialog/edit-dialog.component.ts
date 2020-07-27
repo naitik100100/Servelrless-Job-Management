@@ -30,11 +30,13 @@ export class EditDialogComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
-    this.service.editJob(form.value).subscribe((res) => {
-      console.log(res);
-      this.toastr.success('Record Updated Successfully', 'Job Info Updated');
-    });
-    this.dialogRef.close();
+    let valid = true;
+    if (form.value.qty < 0) {
+      this.toastr.error('Quantity cannot be negative');
+      valid = false;
+    }
+    if (valid) {
+      this.dialogRef.close(form.value);
+    }
   }
 }

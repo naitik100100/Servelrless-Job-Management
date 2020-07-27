@@ -41,7 +41,18 @@ export class DisplayJobsComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = '50%';
-    this.dialog.open(EditDialogComponent, { data: job });
+    const ref = this.dialog.open(EditDialogComponent, { data: job });
+
+    ref.afterClosed().subscribe((result) => {
+      console.log(`Dialog result:  ${result}`);
+
+      if (result) {
+        this.service.editJob(result).subscribe((res) => {
+          console.log(res);
+          this.toastr.success('Record Updated Successfully', 'Quantity Updated');
+        });
+      }
+    });
   }
 
   delete(job: Jobs) {
