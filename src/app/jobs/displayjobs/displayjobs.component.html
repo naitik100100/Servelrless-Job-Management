@@ -1,0 +1,42 @@
+<div class="container-fluid mb-4">
+  <div class="container-fluid title">
+    <h1>All Jobs</h1>
+  </div>
+  <div class="container-fluid show-jobs">
+    <div class="container mat-elevation-z8">
+      <table class="table table-hover">
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col }}
+          </th>
+        </tr>
+        <tr *ngFor="let job of jobs; let i = index">
+          <td>{{ job.jobName }}</td>
+          <td>{{ job.partId }}</td>
+          <td>{{ job.qty }}</td>
+          <td>
+            <mat-icon
+              class="delete-product-button"
+              color="primary"
+              aria-hidden="false"
+              aria-label="update icon"
+              (click)="update(job)"
+              >create</mat-icon
+            >
+            <mat-icon
+              class="btn delete-product-button mb-4 text-danger"
+              color="warn"
+              aria-hidden="false"
+              aria-label="delete icon"
+              (click)="delete(job)"
+              >delete</mat-icon
+            >
+          </td>
+        </tr>
+      </table>
+      <div class="container-fluid title">
+        <a href="/jobs/addjobs" class="btn btn-info mt-4 mb-4">Add Job</a>
+      </div>
+    </div>
+  </div>
+</div>

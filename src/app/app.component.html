@@ -1,0 +1,54 @@
+<!--navbar-->
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+  <a class="navbar-brand" href="/">Company X</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/jobs">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jobs/displayjobs">All Jobs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jobs/addjobs">Add Job</a>
+      </li>
+      <li>
+        <a href="/jobs/getOneJob" class="nav-link">Single Job</a>
+      </li>
+      <li>
+        <a href="/jobs/searchjob" class="nav-link">Search Job</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<!--Footer-->
+
+<footer class="page-footer app-footer blue">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 h-100 text-center my-auto">
+        <div class="footer-copyright text-center">
+          © 2020 Copyright:
+          <a [routerLink]="'/home'"> www.companyX.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

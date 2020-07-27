@@ -1,0 +1,54 @@
+<div class="container-fluid mb-4">
+  <div class="container-fluid title">
+    <h1>Get Specific Job</h1>
+  </div>
+  <div class="container-fluid show-jobs">
+    <div class="container mat-elevation-z8">
+      <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="form-check-label">Job Name</label>
+              <input
+                name="jobName"
+                #jobName="ngModel"
+                [(ngModel)]="service.formData.jobName"
+                class="form-control"
+                required
+              />
+              <div class="validation-error" *ngIf="jobName.invalid && jobName.touched">This field is empty</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="form-check-label">Part Id</label>
+              <input
+                type="number"
+                name="partId"
+                #jobName="ngModel"
+                [(ngModel)]="service.formData.partId"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+      <table class="table table-hover">
+        <tr *ngIf="jobs.length >= 1">
+          <th *ngFor="let col of columns">
+            {{ col }}
+          </th>
+        </tr>
+        <tr *ngFor="let job of jobs; let i = index">
+          <td>{{ job.jobName }}</td>
+          <td>{{ job.partId }}</td>
+          <td>{{ job.qty }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

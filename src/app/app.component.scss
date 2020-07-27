@@ -1,0 +1,62 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  padding: 0 16px;
+  flex: 1 0 auto;
+  //margin-top: 64px;
+}
+
+.app-footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  justify-content: center;
+  background: #0d47a1;
+
+  .container {
+    .row {
+      justify-content: center;
+      color: white;
+
+      li {
+        a {
+          color: white;
+        }
+      }
+    }
+
+    .footer-icon {
+      .fa {
+        padding: 10px;
+        font-size: 25px;
+        text-align: center;
+        text-decoration: none;
+        margin: 3px 2px;
+      }
+
+      .fa:hover {
+        opacity: 0.7;
+      }
+
+      .fa-facebook {
+        color: white;
+      }
+
+      .fa-twitter {
+        color: white;
+      }
+
+      .fa-youtube {
+        color: white;
+      }
+
+      .fa-instagram {
+        color: white;
+      }
+    }
+  }
+}

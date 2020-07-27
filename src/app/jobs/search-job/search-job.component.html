@@ -1,0 +1,26 @@
+<div class="container-fluid search">
+  <div class="main container-fluid">
+    <div class="container-fluid search col-md-6 col-sm-8">
+      <i class="floating-icon search-icon fa fa-search" (click)="searchJob()"></i>
+      <input type="text" name="search" placeholder="Search Job" [(ngModel)]="jobName" (keyup.enter)="searchJob()" />
+      <i class="floating-icon cancel-icon fas fa-times" (click)="clearSearch()"></i>
+    </div>
+  </div>
+</div>
+<div class="container-fluid data-table" style="overflow: auto;">
+  <div class="container">
+    <table class="table table-hover">
+      <tr *ngIf="jobs.length >= 1">
+        <th *ngFor="let col of columns">
+          {{ col }}
+        </th>
+      </tr>
+      <tr *ngFor="let job of jobs; let i = index">
+        <td>{{ job.partId }}</td>
+        <td>{{ job.jobName }}</td>
+        <td>{{ job.userId }}</td>
+        <td>{{ job.qty }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

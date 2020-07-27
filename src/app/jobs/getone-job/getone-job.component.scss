@@ -1,0 +1,23 @@
+div.validation-error {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+input.ng-touched.ng-invalid {
+  border-color: #dc3545;
+}
+
+.show-jobs {
+  height: auto;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  justify-content: center;
+}
+
+.container {
+  padding: 2rem;
+}

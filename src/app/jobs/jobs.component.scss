@@ -1,0 +1,29 @@
+.app-home {
+  margin-top: 2rem;
+}
+.search {
+  margin: 20px auto;
+  input {
+    border-style: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px 40px;
+    border-radius: 25px;
+    width: 100%;
+  }
+}
+
+.floating-icon {
+  position: fixed;
+}
+
+.search-icon {
+  margin-top: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.cancel-icon {
+  margin-top: 15px;
+  margin-left: -28px;
+  cursor: pointer;
+}
