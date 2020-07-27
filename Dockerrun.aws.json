@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "asmitacloudassignment3/company-x-ui"
+    "Name": "asmitacloudassignment3/company-x-ui-a7"
   },
   "Ports": [
     {

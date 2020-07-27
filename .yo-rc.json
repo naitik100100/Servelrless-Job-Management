@@ -8,24 +8,18 @@
       "skipQuickstart": false,
       "initGit": true,
       "usePrefix": true,
-      "appName": "company-x-ui",
-      "target": [
-        "web"
-      ],
+      "appName": "company-x-ui-a7",
+      "target": ["web"],
       "pwa": false,
       "ui": "bootstrap",
       "auth": false,
       "lazy": true,
       "angulartics": false,
-      "languages": [
-        "en-US"
-      ],
-      "tools": [
-        "prettier"
-      ],
+      "languages": ["en-US"],
+      "tools": ["prettier"],
       "utility": [],
       "deploy": "docker",
-      "projectName": "company-x-ui",
+      "projectName": "company-x-ui-a7",
       "packageManager": "npm",
       "mobile": [],
       "desktop": []
