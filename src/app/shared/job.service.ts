@@ -1,6 +1,6 @@
 import { Jobs, JobResponse, JobResponse_OrderedJob } from './jobs.model';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,7 +11,6 @@ export class JobService {
   public JobsList: Jobs[];
 
   readonly URL = 'https://qcutoolbyi.execute-api.us-east-1.amazonaws.com/Dev/api';
-  //'http://companyx-env.eba-niaefern.us-east-1.elasticbeanstalk.com/api';
   //'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
@@ -31,6 +30,19 @@ export class JobService {
   deleteJob(formData: Jobs) {
     return this.http.delete(this.URL + '/jobs/' + formData.jobName + '/' + formData.partId);
   }
+
+  // deleteJob(formData: Jobs) {
+  //   const options = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     }),
+  //     body: {
+  //       jobName: formData.jobName,
+  //       partId : formData.partId.toString(),
+  //     }
+  //   }
+  //   return this.http.delete(this.URL + '/jobs/', options);
+  // }
 
   editJob(formData: Jobs) {
     return this.http.put(this.URL + '/jobs', formData);

@@ -3,6 +3,8 @@ import { JobService } from './../../shared/job.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import { PartsService } from '@app/shared/parts.service';
+import { Parts } from '@app/shared/parts.model';
 
 @Component({
   selector: 'app-addjobs',
@@ -10,12 +12,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./addjobs.component.scss'],
 })
 export class AddJobsComponent implements OnInit {
-  constructor(public service: JobService, private toastr: ToastrService, private router: Router) {}
+  parts: Parts[] = [];
+  constructor(
+    public service: JobService,
+    public part_service: PartsService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.resetFrom();
+    this.getAllParts();
   }
 
+  getAllParts() {
+    this.part_service.getPartsList().subscribe(
+      (response) => {
+        this.parts = response['Items'];
+        //this.searchedJobs = this.jobs;
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
+  }
   resetFrom(form?: NgForm) {
     if (form != null) {
       form.resetForm();
@@ -28,16 +47,25 @@ export class AddJobsComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     console.log(form.value);
-    this.service.postJobs(form.value).subscribe(
-      (res) => {
-        this.resetFrom(form);
-        this.router.navigateByUrl('/jobs/displayjobs');
-        this.toastr.success('New Record Added Successfully', 'Job Info Added');
-      },
-      (error) => {
-        console.log(error.message);
-        this.toastr.error('Part id does not exist in Parts table', 'This Job can not be Added');
+    let flag = false;
+    this.parts.filter((part) => {
+      if (form.value.partId == part.partId) {
+        flag = true;
+        this.service.postJobs(form.value).subscribe(
+          (res) => {
+            this.resetFrom(form);
+            this.router.navigateByUrl('/jobs/displayjobs');
+          },
+          (error) => {
+            console.log(error.message);
+          }
+        );
       }
-    );
+    });
+    if (flag) {
+      this.toastr.success('New Record Added Successfully', 'Job Info Added');
+    } else {
+      this.toastr.error('Part id does not exist in Parts table', 'This Job can not be Added');
+    }
   }
 }
