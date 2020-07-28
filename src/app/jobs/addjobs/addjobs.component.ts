@@ -32,7 +32,6 @@ export class AddJobsComponent implements OnInit {
     this.part_service.getPartsList().subscribe(
       (response) => {
         this.parts = response['Items'];
-        //this.searchedJobs = this.jobs;
         console.log(response);
       },
       (error) => console.log(error)

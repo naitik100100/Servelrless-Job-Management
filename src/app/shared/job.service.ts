@@ -31,28 +31,7 @@ export class JobService {
     return this.http.put(this.URL + '/ajob/', { jobName: formData.jobName, partId: formData.partId });
   }
 
-  // deleteJob(formData: Jobs) {
-  //   const options = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json'
-  //     }),
-  //     body: {
-  //       jobName: formData.jobName,
-  //       partId : formData.partId.toString(),
-  //     }
-  //   }
-  //   return this.http.delete(this.URL + '/jobs/', options);
-  // }
-
   editJob(formData: Jobs) {
     return this.http.put(this.URL + '/jobs', formData);
   }
-
-  // getOneJob(formData: Jobs) {
-  //   return this.http.get<JobResponse>(this.URL + '/jobs/' + formData.jobName + '/' + formData.partId);
-  // }
-
-  // searchJob(jobName: string) {
-  //   return this.http.get<JobResponse>(this.URL + '/searchjobs/' + jobName);
-  // }
 }
