@@ -28,7 +28,7 @@ export class JobService {
   }
 
   deleteJob(formData: Jobs) {
-    return this.http.delete(this.URL + '/jobs/' + formData.jobName + '/' + formData.partId);
+    return this.http.put(this.URL + '/ajob/', { jobName: formData.jobName, partId: formData.partId });
   }
 
   // deleteJob(formData: Jobs) {
